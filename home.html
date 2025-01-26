@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ReShop</title>
+    <link rel="stylesheet" href="/css/style-Home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+    
+
+<!-- PROMPT LOGIN -->
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img class="LogoLogin" src="/Image/LoginLogo.png" />
+
+                <form action="#" method="POST">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p>Não tem uma conta? <a href="#">Crie uma aqui</a></p>
+        </form>
+    </div>
+</div>
+
+
+<body>
+    <div class="Structure">
+    <section class="nav">
+        <img class="LogoInicio" src="/Image/img1.png" />
+        <h1 class="h1-nav">ReShop</h1>
+        <h3>Thrift finds are hidden treasures, each one a story waiting to be told</h3>
+
+        <div class="search-bar">
+            <form action="#" method="GET">
+                <input type="text" class="search-input" placeholder="Buscar produtos..." />
+                <button type="submit" class="search-button">
+                    <img class="imglupa" src="/Image/lupa.png" style="width: 20px; height: 20px;" />
+            </form>
+        </div>
+
+        <div class="nav-container">
+            <a class="nav-itens" href="home.html">Home</a>
+            <a class="nav-itens" href="">Trending</a>
+            <a class="nav-itens" href="stores.html">Stores</a>
+            <a class="nav-itens" href="">My stuff</a>
+            <a class="nav-itens" href="perfil.html">Perfil</a>
+            <span class="nav-itens-slider"></span>
+
+        </div>  
+    </div>
+    </section>
+
+        <section class="et-slide">
+            <div class="image-text-container">
+                <img src="/Image/qq.jpg" alt="Slow Fashion" class="side-image">
+                <div class="side-text">
+                    <h2>Slow Fashion</h2>
+                    <p>
+                        The <b>slow fashion</b> movement emerges as a response to the excessive and disposable consumption driven by the fashion industry. Instead of following fast, often fleeting trends, slow fashion encourages <b>conscious consumption</b>, valuing the durability and quality of garments. The idea is for clothes to be worn for a longer time, preventing them from "sitting idle" in closets or being discarded unnecessarily. This approach criticizes the consumer society, where the constant pursuit of newness leads to waste, overproduction, and the exploitation of workers in poor conditions.
+
+                        By supporting slow fashion, we not only reduce our environmental footprint but also promote fair working conditions and ethical practices in the industry. It’s about making smarter choices—investing in pieces we truly love and will wear repeatedly, rather than succumbing to impulsive shopping habits. Slow fashion invites us to rethink our shopping habits, placing more value on what we already own and considering the environmental and human impact of our choices.
+                        
+                        Ultimately, it’s a lifestyle shift, one that encourages quality over quantity and highlights the importance of responsible consumerism in shaping a more sustainable future.                    </p>
+                </div>
+        </section>
+    
+    <footer>
+        <p>&copy; 2025 - Todos os direitos reservados</p>
+        <p>Entre em contato pelo e-mail: paula19galafassi@gmail.com</p>
+        <nav>
+            <ul>
+                <li><a href="#">Termos de uso</a></li>
+                <li><a href="#">Política de privacidade</a></li>
+                <li><a href="#">Sobre nós</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+
+        window.onload = function() {
+            document.getElementById("loginModal").style.display = "block";  
+        }
+        
+        function closeModal() {
+            document.getElementById("loginModal").style.display = "none"; 
+        }
+        
+        class StickyNavigation {
+    constructor() {
+        this.currentId = null;
+        this.currentTab = null;
+        this.tabContainerHeight = 70;
+        let self = this;
+        $('.nav-itens').click(function(event) { 
+            self.onTabClick(event, $(this)); 
+        });
+        $(window).scroll(() => { this.onScroll(); });
+        $(window).resize(() => { this.onResize(); });
+    }
+
+    onTabClick(event, element) {
+        const href = element.attr('href');
+        if (href && !href.startsWith('#')) {
+            return;
+        }
+
+        event.preventDefault(); 
+        let scrollTop = $(href).offset().top - this.tabContainerHeight + 1;
+        $('html, body').animate({ scrollTop: scrollTop }, 600);
+    }
+
+    onScroll() {
+        this.checkTabContainerPosition();
+        this.findCurrentTabSelector();
+    }
+
+    onResize() {
+        if (this.currentId) {
+            this.setSliderCss();
+        }
+    }
+
+    checkTabContainerPosition() {
+        let offset = $('.nav').offset().top + $('.nav').height() - this.tabContainerHeight;
+        if ($(window).scrollTop() > offset) {
+            $('.nav-container').addClass('nav-container--top');
+        } else {
+            $('.nav-container').removeClass('nav-container--top');
+        }
+    }
+
+    setSliderCss() {
+        let width = 0;
+        let left = 0;
+        if (this.currentTab) {
+            width = this.currentTab.css('width');
+            left = this.currentTab.offset().left;
+        }
+        $('.nav-itens-slider').css('width', width);
+        $('.nav-itens-slider').css('left', left);
+    }
+}
+
+new StickyNavigation();
+    </script>
+</body>
